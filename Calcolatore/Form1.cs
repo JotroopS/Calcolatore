@@ -13,7 +13,7 @@ namespace Calcolatore
 {
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -27,35 +27,56 @@ namespace Calcolatore
 
         private void Calcola_Click(object sender, EventArgs e)
         {
-            int nhost = int.Parse(NHost.Text), nreti = int.Parse(NReti.Text); int Cdir = Convert.ToInt32(Math.Log(nhost + 2, 2) + Math.Log(nreti, 2));
-            if (Cdir <= 8)
-            {
-                Classe.Text = "Classe C";
-                CDIR.Text = "/8";
-                SubnetDef.Text = "255.255.255.0";
-            }
-            else if (Cdir <= 16)
-            {
-                Classe.Text = "Classe B";
-                CDIR.Text = "/16";
-                SubnetDef.Text = "255.255.0.0";
-            }
-            else if (Cdir <= 24)
-            {
-                Classe.Text = "Classe A";
-                CDIR.Text = "/24";
-                SubnetDef.Text = "255.0.0.0";
-            }
-            else if (Cdir > 24)
-            {
-                MessageBox.Show("Hai inserito troppi host");
-                NHost.Clear();
-                NReti.Clear();
-                Classe.Clear();
-                CDIR.Clear();
-                SubnetDef.Clear();
-            }
-
+            int nhost = int.Parse(NHost.Text), nreti = int.Parse(NReti.Text); int classe = Convert.ToInt32(Math.Log(nhost + 2, 2) + Math.Log(nreti, 2));
+            string classef = TrovaClasse(classe);
+            int bit = CalcolaBit(nhost);
+            string CDIR = $"/{bit.ToString()}";
+            string subnet = CalcolaSubnet(bit);
+            Tabella.Items.Add($"Classe: {classef} CDIR: {CDIR} Subnet Mask: {subnet}");
         }
-    }
-}
+        private int CalcolaBit(int nhost)
+        {
+            int bit = 0;
+            while ((int)Math.Pow(2, bit) - 2 < nhost)
+            {
+                bit++;
+            }
+            return bit;
+        }
+        private string CalcolaSubnet(int bit)
+        {
+            int[] subnet = new int[4];
+            for (int i = 0; i < subnet.Length; i++)
+            {
+                if (bit >= 8)
+                {
+                    subnet[i] = 255;
+                    bit -= 8;
+                }
+                else
+                {
+                    subnet[i] = (int)(255 - (Math.Pow(2, 8 - bit) - 1));
+                    bit = 0;
+                }
+            }
+            return $"{subnet[0]}.{subnet[1]}.{subnet[2]}.{subnet[3]}";
+        }
+        private string TrovaClasse(int classe)
+        {
+            if (classe >= 24)
+            {
+                return "C";
+            }
+            else if (classe >= 16)
+            {
+                return "B";
+
+            }
+            else
+            {
+                return "A";
+            }
+            }
+        }
+    } 
+
