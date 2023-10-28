@@ -29,10 +29,11 @@ namespace Calcolatore
         {
             int nhost = int.Parse(NHost.Text), nreti = int.Parse(NReti.Text); int classe = Convert.ToInt32(Math.Log(nhost + 2, 2) + Math.Log(nreti, 2));
             string classef = TrovaClasse(classe);
+            Classe.Text = classef;
+            Privato.Text = IndirizzoPrivato(classef);
             int bit = CalcolaBit(nhost);
-            string CDIR = $"/{bit.ToString()}";
-            string subnet = CalcolaSubnet(bit);
-            Tabella.Items.Add($"Classe: {classef} CDIR: {CDIR} Subnet Mask: {subnet}");
+            CDIR.Text = $"/{bit.ToString()}";
+            Subnet.Text = CalcolaSubnet(bit);
         }
         private int CalcolaBit(int nhost)
         {
@@ -76,7 +77,22 @@ namespace Calcolatore
             {
                 return "A";
             }
+        }
+        private string IndirizzoPrivato(string classef)
+        {
+            if (classef == "C")
+            {
+                return "192.168.0.0";
+            }
+            else if (classef == "B")
+            {
+                return "172.16.0.0";
+            }
+            else
+            {
+                return "10.0.0.0";
             }
         }
-    } 
+    }
+}
 
