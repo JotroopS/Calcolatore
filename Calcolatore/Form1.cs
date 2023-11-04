@@ -45,10 +45,11 @@ namespace Calcolatore
             {
                 sottorete = $"{random.Next(128, 191)}.{random.Next(128, 191)}.{random.Next(128, 191)}.{random.Next(128, 191)}";
             }
-            else
+            else if(Classe.Text == "C")
             {
                 sottorete = $"{random.Next(192, 255)}.{random.Next(192, 255)}.{random.Next(192, 255)}.{random.Next(192, 255)}";
             }
+            SottoreteRand.Text = sottorete;
         }
         private int CalcolaBit(int nhost)
         {
@@ -79,11 +80,11 @@ namespace Calcolatore
         }
         private string TrovaClasse(int classe)
         {
-            if (classe <= 8)
+            if (classe >= 8)
             {
                 return "A";
             }
-            else if (classe <= 16)
+            else if (classe >= 16)
             {
                 return "B";
 

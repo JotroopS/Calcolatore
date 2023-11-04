@@ -42,6 +42,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Privato = new System.Windows.Forms.TextBox();
+            this.SottoreteRand = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // NHost
@@ -165,11 +167,30 @@
             this.Privato.Size = new System.Drawing.Size(152, 20);
             this.Privato.TabIndex = 15;
             // 
+            // SottoreteRand
+            // 
+            this.SottoreteRand.Location = new System.Drawing.Point(28, 389);
+            this.SottoreteRand.Name = "SottoreteRand";
+            this.SottoreteRand.Size = new System.Drawing.Size(152, 20);
+            this.SottoreteRand.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(25, 370);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(126, 16);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Sottorete random";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.SottoreteRand);
             this.Controls.Add(this.Privato);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Tabella);
@@ -208,6 +229,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox Privato;
+        private System.Windows.Forms.TextBox SottoreteRand;
+        private System.Windows.Forms.Label label7;
     }
 }
 
