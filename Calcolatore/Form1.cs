@@ -33,7 +33,22 @@ namespace Calcolatore
             Privato.Text = IndirizzoPrivato(classef);
             int bit = CalcolaBit(nhost);
             CDIR.Text = $"/{bit.ToString()}";
-            Subnet.Text = CalcolaSubnet(bit);
+            string subnetMask = CalcolaSubnet(bit);
+            Subnet.Text = subnetMask;
+            Random random = new Random();
+            string sottorete = "";
+            if (Classe.Text == "A")
+            {
+                sottorete = $"{random.Next(0,127)}.{random.Next(0, 127)}.{random.Next(0, 127)}.{random.Next(0, 127)}";
+            }
+            else if (Classe.Text =="B")
+            {
+                sottorete = $"{random.Next(128, 191)}.{random.Next(128, 191)}.{random.Next(128, 191)}.{random.Next(128, 191)}";
+            }
+            else
+            {
+                sottorete = $"{random.Next(192, 255)}.{random.Next(192, 255)}.{random.Next(192, 255)}.{random.Next(192, 255)}";
+            }
         }
         private int CalcolaBit(int nhost)
         {
@@ -42,7 +57,7 @@ namespace Calcolatore
             {
                 bit++;
             }
-            return bit;
+            return bit + 8;
         }
         private string CalcolaSubnet(int bit)
         {
@@ -64,18 +79,18 @@ namespace Calcolatore
         }
         private string TrovaClasse(int classe)
         {
-            if (classe >= 24)
+            if (classe <= 8)
             {
-                return "C";
+                return "A";
             }
-            else if (classe >= 16)
+            else if (classe <= 16)
             {
                 return "B";
 
             }
             else
             {
-                return "A";
+                return "C";
             }
         }
         private string IndirizzoPrivato(string classef)
